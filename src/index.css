@@ -7,7 +7,8 @@ body {
 .container {
   margin: 0 auto;
   max-width: 860px;
-  padding: 20px;
+  padding: 20px 20px 50px;
+  text-align: center;
 }
 
 h2.PageTitle {
@@ -18,17 +19,61 @@ h2.PageTitle {
   text-align: center;
 }
 
-p {
-  margin: 10px 5px;
+.questions, .meals {
+  display: inline-block;
+  vertical-align: top;
+  width: 50%
+}
+
+.questions {
+  border-right: 1px solid;
+  box-sizing: border-box;
+}
+
+.chooseButton {
+  border-top: 1px solid;
+  bottom: 0;
+  box-sizing: border-box;
+  left: 0;
+  padding: 2px;
+  position: fixed;
+  width: 100%;
+}
+
+.chooseButton button {
+  border-color: #000000;
+  font-weight: bold;
+  padding: 5px 15px;
+}
+
+.questions p {
+  background-color: #aaaaaa;
+  margin: 10px 5px 10px 0;
+  padding: 5px 0;
+}
+
+.meals p {
+  border: solid 2px #000000;
+  color: #008000;
+  margin: 10px 0 10px 5px;
+  padding: 2px 0;
 }
 
 button {
   background-color: #ffffff;
   border: 2px solid;
   display: block;
-  margin: 8px 5px;
+  margin: 8px auto;
 }
 
 button:hover {
   cursor: pointer;
+}
+
+@media (min-width: 680px) {
+  .questions p,
+  .meals p {
+    margin: 10px auto;
+    max-width: 300px;
+  }
 }
