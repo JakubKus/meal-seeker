@@ -1,17 +1,16 @@
 body {
+  font-family: sans-serif;
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
 }
 
-.container {
+main.container {
   margin: 0 auto;
   max-width: 860px;
   padding: 20px 20px 50px;
-  text-align: center;
 }
 
-h2.PageTitle {
+h2.pageTitle {
   border: 4px solid;
   color: #444;
   font-size: 30px;
@@ -19,18 +18,52 @@ h2.PageTitle {
   text-align: center;
 }
 
-.questions, .meals {
+aside.form {
+  border-right: 1px solid;
+  padding-right: 5px;
+}
+
+aside.form p {
+  background-color: #aaaaaa;
+  margin: 10px auto;
+  padding: 5px 0;
+}
+aside.meals {
+  padding-left: 5px;
+}
+
+aside.meals p {
+  border: solid 2px #000000;
+  margin: 10px auto;
+  padding: 2px 0;
+}
+
+aside.form, aside.meals {
+  box-sizing: border-box;
   display: inline-block;
   vertical-align: top;
-  width: 50%
+  width: 50%;
+  text-align: center;
 }
 
-.questions {
-  border-right: 1px solid;
-  box-sizing: border-box;
+button {
+  background-color: #ffffff;
+  border: 2px solid;
+  cursor: pointer;
+  display: block;
+  margin: 8px auto;
 }
 
-.chooseButton {
+button.checked {
+  color: green;
+}
+
+p.inactive {
+  display: none;
+}
+
+footer.chooseButton {
+  background-color: #d5d5d5;
   border-top: 1px solid;
   bottom: 0;
   box-sizing: border-box;
@@ -40,40 +73,25 @@ h2.PageTitle {
   width: 100%;
 }
 
-.chooseButton button {
-  border-color: #000000;
+footer.chooseButton.active {
+  background-color: #35fF42;
+}
+
+footer.chooseButton button {
+  border-color: #777777;
+  color: #777777;
   font-weight: bold;
   padding: 5px 15px;
 }
 
-.questions p {
-  background-color: #aaaaaa;
-  margin: 10px 5px 10px 0;
-  padding: 5px 0;
+footer.chooseButton.active button {;
+  border-color: #000000;
+  color: #000000;
 }
 
-.meals p {
-  border: solid 2px #000000;
-  color: #008000;
-  margin: 10px 0 10px 5px;
-  padding: 2px 0;
-}
-
-button {
-  background-color: #ffffff;
-  border: 2px solid;
-  display: block;
-  margin: 8px auto;
-}
-
-button:hover {
-  cursor: pointer;
-}
-
-@media (min-width: 680px) {
-  .questions p,
+@media (min-width: 650px) {
+  .form p,
   .meals p {
-    margin: 10px auto;
     max-width: 300px;
   }
 }
