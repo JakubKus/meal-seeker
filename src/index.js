@@ -2,220 +2,118 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-class Buttons extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      changeButtonColor: "rgb(170, 170, 170)"
-    }
-  }
-
-  activateChangeButton = () => {
-    let buttons = document.getElementsByTagName("BUTTON");
-    this.setState({changeButtonColor: "rgb(170, 170, 170)"});
-    for(let button of buttons) {
-      if(button.style.color === "rgb(0, 200, 0)") {
-        this.setState({changeButtonColor: "rgb(25, 186, 0)"})
-      }
-    }
-  };
-
-  render() {
-    return(
-      <RenderButtons activate={this.activateChangeButton} changeButton={this.state.changeButtonColor}/>
-    )
-  }
-}
-
-class RenderButtons extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      "Less than 200": false,
-      "200 - 500": false,
-      "More than 500": false,
-      "Salty": false,
-      "Sweet": false,
-      "Spicy": false,
-      "Bitter": false,
-      "Sour": false,
-      "Less than 5": false,
-      "5 - 15": false,
-      "More than 15": false,
-      "Easy": false,
-      "Medium": false,
-      "Hard": false,
-      "Very hard": false,
-      "Hot": false,
-      "Cold": false,
-      "High carb": false,
-      "High fat": false,
-      "High protein":false
-    }
-  }
-
-  changeButtonsColor = (e) => {
-    e.target.style.color = (e.target.style.color === "rgb(0, 200, 0)") ? "rgb(0, 0, 0)" : "rgb(0, 200, 0)";
-    let answer = e.target.innerHTML.trim();
-    this.setState((this.state[answer] === false) ? {[answer]: true} : {[answer]: false});
-  };
-
+class FoodPicker extends React.Component {
   render() {
     return(
       <main className="container">
-        <h2 className="PageTitle">Food Picker</h2>
-        <div className="questions">
-          <p>Calories / 100g</p>
-          <button onClick={(e) => { this.changeButtonsColor(e); this.props.activate()} } > Less than 200 </button>
-          <button onClick={(e) => { this.changeButtonsColor(e); this.props.activate()} } > 200 - 500 </button>
-          <button onClick={(e) => { this.changeButtonsColor(e); this.props.activate()} } > More than 500 </button>
-          <p>Flavor</p>
-          <button onClick={(e) => { this.changeButtonsColor(e); this.props.activate()} } > Bitter </button>
-          <button onClick={(e) => { this.changeButtonsColor(e); this.props.activate()} } > Salty </button>
-          <button onClick={(e) => { this.changeButtonsColor(e); this.props.activate()} } > Sour </button>
-          <button onClick={(e) => { this.changeButtonsColor(e); this.props.activate()} } > Spicy </button>
-          <button onClick={(e) => { this.changeButtonsColor(e); this.props.activate()} } > Sweet </button>
-          <p>Preparation time [mins]</p>
-          <button onClick={(e) => { this.changeButtonsColor(e); this.props.activate()} } > Less than 5</button>
-          <button onClick={(e) => { this.changeButtonsColor(e); this.props.activate()} } > 5 - 15 </button>
-          <button onClick={(e) => { this.changeButtonsColor(e); this.props.activate()} } > More than 15 </button>
-          <p>Difficulty level</p>
-          <button onClick={(e) => { this.changeButtonsColor(e); this.props.activate()} } > Easy </button>
-          <button onClick={(e) => { this.changeButtonsColor(e); this.props.activate()} } > Medium </button>
-          <button onClick={(e) => { this.changeButtonsColor(e); this.props.activate()} } > Hard </button>
-          <button onClick={(e) => { this.changeButtonsColor(e); this.props.activate()} } > Very hard </button>
-          <p>Temperature</p>
-          <button onClick={(e) => { this.changeButtonsColor(e); this.props.activate()} } > Cold </button>
-          <button onClick={(e) => { this.changeButtonsColor(e); this.props.activate()} } > Hot </button>
-          <p>Macros</p>
-          <button onClick={(e) => { this.changeButtonsColor(e); this.props.activate()} } > High carb </button>
-          <button onClick={(e) => { this.changeButtonsColor(e); this.props.activate()} } > High fat </button>
-          <button onClick={(e) => { this.changeButtonsColor(e); this.props.activate()} } > High protein </button>
-        </div>
-        <div className="meals">
-          <p style=
-               {{ display:
-                   ((
-                       this.state["200 - 500"] ||
-                       this.state["Sweet"] ||
-                       this.state["Less than 5"] ||
-                       this.state["Easy"] ||
-                       this.state["Cold"] ||
-                       this.state["High carb"]
-                     ) &&
-                     !this.state["Less than 200"] &&
-                     !this.state["More than 500"] &&
-                     !this.state["Salty"] &&
-                     !this.state["Bitter"] &&
-                     !this.state["Sour"] &&
-                     !this.state["Spicy"] &&
-                     !this.state["5 - 15"] &&
-                     !this.state["More than 15"] &&
-                     !this.state["Medium"] &&
-                     !this.state["Hard"] &&
-                     !this.state["Very hard"] &&
-                     !this.state["Hot"] &&
-                     !this.state["High fat"] &&
-                     !this.state["High protein"]
-                   ) ? "block" : "none"
-               }}>Breakfast cereals
-          </p>
-
-          <p style=
-               {{ display:
-                   ((
-                       this.state["200 - 500"] ||
-                       this.state["Sweet"] ||
-                       this.state["More than 15"] ||
-                       this.state["Medium"] ||
-                       this.state["Cold"] ||
-                       this.state["High carb"] ||
-                       this.state["High fat"]
-                     ) &&
-                     !this.state["Less than 200"] &&
-                     !this.state["More than 500"] &&
-                     !this.state["Salty"] &&
-                     !this.state["Bitter"] &&
-                     !this.state["Sour"] &&
-                     !this.state["Spicy"] &&
-                     !this.state["Less than 5"] &&
-                     !this.state["5 - 15"] &&
-                     !this.state["Easy"] &&
-                     !this.state["Hard"] &&
-                     !this.state["Very hard"] &&
-                     !this.state["Hot"] &&
-                     !this.state["High protein"]
-                   ) ? "block" : "none"
-               }}>Cheesecake
-          </p>
-
-          <p style=
-               {{ display:
-                   ((
-                       this.state["200 - 500"] ||
-                       this.state["Sweet"] ||
-                       this.state["5 - 15"] ||
-                       this.state["Medium"] ||
-                       this.state["Hot"] ||
-                       this.state["High carb"] ||
-                       this.state["High fat"]
-                     ) &&
-                     !this.state["Less than 200"] &&
-                     !this.state["More than 500"] &&
-                     !this.state["Bitter"] &&
-                     !this.state["Salty"] &&
-                     !this.state["Sour"] &&
-                     !this.state["Spicy"] &&
-                     !this.state["Less than 5"] &&
-                     !this.state["More than 15"] &&
-                     !this.state["Easy"] &&
-                     !this.state["Hard"] &&
-                     !this.state["Very hard"] &&
-                     !this.state["Cold"] &&
-                     !this.state["High protein"]
-                   ) ? "block" : "none"
-               }}>Pancakes
-          </p>
-
-          <p style=
-               {{ display:
-                   ((
-                       this.state["Less than 200"] ||
-                       this.state["Salty"] ||
-                       this.state["More than 15"] ||
-                       this.state["Medium"] ||
-                       this.state["Hot"] ||
-                       this.state["High carb"]
-                     ) &&
-                     !this.state["200 - 500"] &&
-                     !this.state["More than 500"] &&
-                     !this.state["Bitter"] &&
-                     !this.state["Sour"] &&
-                     !this.state["Spicy"] &&
-                     !this.state["Sweet"] &&
-                     !this.state["Less than 5"] &&
-                     !this.state["5 - 15"] &&
-                     !this.state["Easy"] &&
-                     !this.state["Hard"] &&
-                     !this.state["Very hard"] &&
-                     !this.state["Cold"] &&
-                     !this.state["High fat"] &&
-                     !this.state["High protein"]
-                   ) ? "block" : "none"
-               }}>Spaghetti
-          </p>
-        </div>
-        <div className="chooseButton" style={{backgroundColor: this.props.changeButton}}>
-          <button style={{color: this.props.changeButton}}>Choose</button>
-        </div>
+        <h2 className="pageTitle">Food Picker</h2>
+        <Body/>
       </main>
     )
   }
 }
 
-ReactDOM.render(
-  <Buttons/>,
-  document.getElementById('root')
-);
+class Body extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      form: [
+        {type: "question",  content: "Calories / 100g"},
+        {type: "answer",    content: "Less than 200",  isChecked: false},
+        {type: "answer",    content: "200 - 500",      isChecked: false},
+        {type: "answer",    content: "More than 500",  isChecked: false},
+        {type: "question",  content: "Flavor"},
+        {type: "answer",    content: "Salty",          isChecked: false},
+        {type: "answer",    content: "Sweet",          isChecked: false},
+        {type: "answer",    content: "Spicy",          isChecked: false},
+        {type: "answer",    content: "Bitter",         isChecked: false},
+        {type: "answer",    content: "Sour",           isChecked: false},
+        {type: "question",  content: "Preparation time [mins]"},
+        {type: "answer",    content: "Less than 5",    isChecked: false},
+        {type: "answer",    content: "5 - 15",         isChecked: false},
+        {type: "answer",    content: "More than 15",   isChecked: false},
+        {type: "question",  content: "Difficulty level"},
+        {type: "answer",    content: "Easy",           isChecked: false},
+        {type: "answer",    content: "Medium",         isChecked: false},
+        {type: "answer",    content: "Hard",           isChecked: false},
+        {type: "answer",    content: "Very hard",      isChecked: false},
+        {type: "question",  content: "Temperature"},
+        {type: "answer",    content: "Hot",            isChecked: false},
+        {type: "answer",    content: "Cold",           isChecked: false},
+        {type: "question",  content: "Macros"},
+        {type: "answer",    content: "High carb",      isChecked: false},
+        {type: "answer",    content: "High fat",       isChecked: false},
+        {type: "answer",    content: "High protein",   isChecked: false}
+      ],
+      meals: [
+        {name: "Pizza",     properties: ["200 - 500", "Salty", "More than 15", "Medium", "Hot", "High carb"],       isActive: false},
+        {name: "Pancakes",  properties: ["200 - 500", "Sweet", "5 - 15", "Medium", "Hot", "High carb", "High fat"], isActive: false}
+      ]
+    };
+    this.showMeals = this.showMeals.bind(this)
+  }
+
+  toggleAnswer(answerIndex) {
+    let formElement = this.state.form[answerIndex];
+    let updatedForm = this.state.form;
+    updatedForm.splice(answerIndex, 1, {type: formElement.type, content: formElement.content, isChecked: formElement.isChecked === false});
+    this.setState({form: updatedForm}, this.showMeals)
+  }
+
+  showMeals() {
+    let showMeal;
+    let updatedMeals = this.state.meals.map((meal) => {
+      showMeal = "unknown";
+      this.state.form.map((formProperty) => {
+        if (showMeal)
+        if (formProperty.type === "answer")
+        if (formProperty.isChecked)
+          showMeal = meal.properties.some(mealProperty => mealProperty === formProperty.content);
+        return showMeal;
+      });
+      return {name: meal.name, isActive: showMeal === true, properties: meal.properties}
+    });
+    this.setState({meals: updatedMeals})
+  }
+
+  render() {
+    let form = this.state.form.map((element, index) => {
+      return (
+        element.type === "answer" ?
+          <SingleButton answer={element.content}
+            checkAnswer={this.toggleAnswer.bind(this, index)}
+            isChecked={this.state.form[index].isChecked}
+            key={index}
+          />
+        :
+          <p key={index}>{element.content}</p>
+      )
+    });
+
+    let meals = this.state.meals.map((element, index) => {
+      return <p key={index} className={element.isActive ? "" : "inactive"}>{element.name}</p>
+    });
+
+    let chooseButton = meals.some(meal => meal.props.className !== "inactive");
+
+    return(
+      <div>
+        <aside className="form">{form}</aside>
+        <aside className="meals">{meals}</aside>
+        <footer className={chooseButton ? "chooseButton active" : "chooseButton"}>
+          <button>Choose</button>
+        </footer>
+      </div>
+    )
+  }
+}
+
+class SingleButton extends React.Component {
+  render() {
+    return (
+      <button name="answer" onClick={this.props.checkAnswer} className={this.props.isChecked ? "checked" : ""}>{this.props.answer}</button>
+    )
+  }
+}
+
+ReactDOM.render( <FoodPicker/>, document.getElementById('root') );
