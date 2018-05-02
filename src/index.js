@@ -19,9 +19,9 @@ class Body extends React.Component {
     this.state = {
       form: [
         {type: "question",  content: "Calories / 100g"},
-        {type: "answer",    content: "Less than 200",  isChecked: false},
-        {type: "answer",    content: "200 - 500",      isChecked: false},
-        {type: "answer",    content: "More than 500",  isChecked: false},
+        {type: "answer",    content: "Less than 100",  isChecked: false},
+        {type: "answer",    content: "100 - 300",      isChecked: false},
+        {type: "answer",    content: "More than 300",  isChecked: false},
         {type: "question",  content: "Flavor"},
         {type: "answer",    content: "Salty",          isChecked: false},
         {type: "answer",    content: "Sweet",          isChecked: false},
@@ -46,11 +46,52 @@ class Body extends React.Component {
         {type: "answer",    content: "High protein",   isChecked: false}
       ],
       meals: [
-        {name: "Pizza",     properties: ["200 - 500", "Salty", "More than 15", "Medium", "Hot", "High carb"],       isActive: false},
-        {name: "Pancakes",  properties: ["200 - 500", "Sweet", "5 - 15", "Medium", "Hot", "High carb", "High fat"], isActive: false}
-      ]
+        { name: "Beef curry",
+          properties: ["100 - 300", "Salty", "More than 15", "Hard", "Hot", "High protein"],
+          isActive: false
+        },
+        { name: "Cereal flakes",
+          properties: ["More than 300", "Sweet", "Less than 5", "Easy", "Cold", "High carb"],
+          isActive: false
+        },
+        { name: "Cheesecake",
+          properties: ["More than 300", "Sweet", "More than 15", "Medium", "Cold", "High fat"],
+          isActive: false
+        },
+        { name: "Lasagne bolognese",
+          properties: ["100 - 300", "Salty", "More than 15", "Very hard", "Hot", "High fat"],
+          isActive: false
+        },
+        { name: "Pancakes",
+          properties: ["100 - 300", "Sweet", "5 - 15", "Medium", "Hot", "High carb"],
+          isActive: false
+        },
+        { name: "Pizza",
+          properties: ["100 - 300", "Salty", "More than 15", "Medium", "Hot", "High carb"],
+          isActive: false
+        },
+        { name: "Pork chop",
+          properties: ["100 - 300", "Salty", "More than 15", "Medium", "Hot", "High carb"],
+          isActive: false
+        },
+        { name: "Salmon penne",
+          properties: ["100 - 300", "Salty", "More than 15", "Medium", "Hot", "High protein", "High carb"],
+          isActive: false
+        },
+        { name: "Tiramisu",
+          properties: ["100 - 300", "Sweet", "More than 15", "Hard", "Cold", "High fat"],
+          isActive: false
+        },
+        { name: "Tuna Mornay",
+          properties: ["Less than 100", "Salty", "More than 15", "Medium", "Hot", "High carb"],
+          isActive: false
+        }
+      ],
+      isMealChosen: false
     };
-    this.showMeals = this.showMeals.bind(this)
+    this.showMeals = this.showMeals.bind(this);
+    this.chooseMeal = this.chooseMeal.bind(this);
+    this.closeChosenMeal = this.closeChosenMeal.bind(this);
   }
 
   toggleAnswer(answerIndex) {
@@ -76,12 +117,25 @@ class Body extends React.Component {
     this.setState({meals: updatedMeals})
   }
 
+  chooseMeal() {
+    let activeMeals = this.state.meals.filter(activeMeal => activeMeal.isActive === true);
+    let randomMeal = (activeMeals.length > 0) && activeMeals[Math.floor(Math.random() * activeMeals.length)].name;
+    document.getElementById("randomMeal").innerHTML = randomMeal;
+    this.setState({isMealChosen: true})
+  }
+
+  closeChosenMeal() {
+    document.getElementById("randomMeal").innerHTML = "";
+    this.setState({isMealChosen: false})
+  }
+
   render() {
+
     let form = this.state.form.map((element, index) => {
       return (
         element.type === "answer" ?
           <SingleButton answer={element.content}
-            checkAnswer={this.toggleAnswer.bind(this, index)}
+            toggleAnswer={this.toggleAnswer.bind(this, index)}
             isChecked={this.state.form[index].isChecked}
             key={index}
           />
@@ -93,16 +147,23 @@ class Body extends React.Component {
     let meals = this.state.meals.map((element, index) => {
       return <p key={index} className={element.isActive ? "" : "inactive"}>{element.name}</p>
     });
+    let chooseButtonActive = meals.some(meal => meal.props.className !== "inactive") ? " active" : "";
 
-    let chooseButton = meals.some(meal => meal.props.className !== "inactive");
+    let randomMealChosen = this.state.isMealChosen ? "chosen" : "notChosen";
+    let blur = this.state.isMealChosen ? " on" : " off";
 
     return(
       <div>
+        <div className={"blur" + blur}/>
         <aside className="form">{form}</aside>
         <aside className="meals">{meals}</aside>
-        <footer className={chooseButton ? "chooseButton active" : "chooseButton"}>
-          <button>Choose</button>
+        <footer className={"chooseButton" + chooseButtonActive}>
+          <button onClick={this.chooseMeal}>Choose</button>
         </footer>
+        <figure className={randomMealChosen}>
+          <span id="randomMeal"/>
+          <span className="close" onClick={this.closeChosenMeal}>&times;</span>
+        </figure>
       </div>
     )
   }
@@ -111,7 +172,7 @@ class Body extends React.Component {
 class SingleButton extends React.Component {
   render() {
     return (
-      <button name="answer" onClick={this.props.checkAnswer} className={this.props.isChecked ? "checked" : ""}>{this.props.answer}</button>
+      <button name="answer" onClick={this.props.toggleAnswer} className={this.props.isChecked ? "checked" : ""}>{this.props.answer}</button>
     )
   }
 }
