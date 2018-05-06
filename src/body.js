@@ -75,7 +75,8 @@ export default class Body extends React.Component {
           isActive: false
         }
       ],
-      isMealChosen: false
+      isMealChosen: false,
+      randomMeal: ""
     };
     this.showMeals = this.showMeals.bind(this);
     this.chooseMeal = this.chooseMeal.bind(this);
@@ -108,13 +109,11 @@ export default class Body extends React.Component {
   chooseMeal() {
     let activeMeals = this.state.meals.filter(activeMeal => activeMeal.isActive === true);
     let randomMeal = (activeMeals.length > 0) && activeMeals[Math.floor(Math.random() * activeMeals.length)].name;
-    document.getElementById("randomMeal").innerHTML = randomMeal;
-    this.setState({isMealChosen: true})
+    this.setState({isMealChosen: true, randomMeal: randomMeal})
   }
 
   closeChosenMeal() {
-    document.getElementById("randomMeal").innerHTML = "";
-    this.setState({isMealChosen: false})
+    this.setState({isMealChosen: false, randomMeal: ""})
   }
 
   render() {
@@ -145,10 +144,10 @@ export default class Body extends React.Component {
         <aside className="form">{form}</aside>
         <aside className="meals">{meals}</aside>
         <footer className={"chooseButton" + chooseButtonActive}>
-          <button onClick={this.chooseMeal}>Choose</button>
+          <button disabled={!chooseButtonActive} onClick={this.chooseMeal}>Choose</button>
         </footer>
         <figure className={randomMealChosen}>
-          <span id="randomMeal"/>
+          <span id="randomMeal">{this.state.randomMeal}</span>
           <span className="close" onClick={this.closeChosenMeal}>&times;</span>
         </figure>
       </div>
