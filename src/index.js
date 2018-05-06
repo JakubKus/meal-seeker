@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Body from './body';
-import './index.css';
 
 class FoodPicker extends React.Component {
   render() {
