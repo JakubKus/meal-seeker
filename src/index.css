@@ -67,12 +67,16 @@ button {
   background-color: #ffffff;
   border: 2px solid;
   cursor: pointer;
-  display: block;
-  margin: 8px auto;
+  display: inline-block;
+  margin: 4px 3px;
 }
 
 button.checked {
   color: green;
+}
+
+button:disabled {
+  cursor: auto;
 }
 
 p.inactive {
@@ -87,6 +91,7 @@ footer.chooseButton {
   left: 0;
   padding: 2px;
   position: fixed;
+  text-align: center;
   width: 100%;
 }
 
@@ -98,6 +103,7 @@ footer.chooseButton button {
   border-color: #777777;
   color: #777777;
   font-weight: bold;
+  margin: 8px auto;
   padding: 5px 15px;
 }
 
