@@ -2,6 +2,7 @@
   "name": "food-picker",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://jakubkus.github.io/food-picker",
   "dependencies": {
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
@@ -11,13 +12,16 @@
     "start": "react-scripts start",
     "test": "jest --watch",
     "build": "react-scripts build",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
     "ajv": "^6.4.0",
     "babel-jest": "^22.4.3",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "gh-pages": "^1.1.0",
     "jest": "^22.4.3",
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme": "^3.3.0",
