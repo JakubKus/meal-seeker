@@ -6,10 +6,10 @@ import Body from './body';
 class FoodPicker extends React.Component {
   render() {
     return(
-      <main className="container">
-        <h2 className="pageTitle">Food Picker</h2>
+      <div className="container">
+        <h1 className="pageTitle">Food Picker</h1>
         <Body/>
-      </main>
+      </div>
     )
   }
 }
