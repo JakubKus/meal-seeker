@@ -76,11 +76,16 @@ export default class Body extends React.Component {
         }
       ],
       isMealChosen: false,
-      randomMeal: ""
+      randomMeal: "",
+      disableRandomMeal: false,
+      allrecipes: false,
+      simplyrecipes: false,
+      tasteofhome: false
     };
     this.showMeals = this.showMeals.bind(this);
     this.chooseMeal = this.chooseMeal.bind(this);
     this.closeChosenMeal = this.closeChosenMeal.bind(this);
+    this.showLinks = this.showLinks.bind(this);
   }
 
   toggleAnswer(answerIndex) {
@@ -109,11 +114,52 @@ export default class Body extends React.Component {
   chooseMeal() {
     let activeMeals = this.state.meals.filter(activeMeal => activeMeal.isActive === true);
     let randomMeal = (activeMeals.length > 0) && activeMeals[Math.floor(Math.random() * activeMeals.length)].name;
-    this.setState({isMealChosen: true, randomMeal: randomMeal})
+    this.setState({isMealChosen: true, randomMeal: randomMeal});
   }
 
   closeChosenMeal() {
-    this.setState({isMealChosen: false, randomMeal: ""})
+    this.setState({isMealChosen: false, randomMeal: "", disableRandomMeal: false, allrecipes: false, simplyrecipes: false, tasteofhome: false})
+  }
+
+  showLinks() {
+    fetch('https://www.googleapis.com/customsearch/v1?key=AIzaSyCTP476uPipVIGxjoyRRXkIfMUhlDcboH8&cx=016071729215467533297:y_i4qha-dzc&q=' + this.state.randomMeal + ' recipe')
+      .then(response => {
+        if (response.status !== 200) {
+          this.setState({disableRandomMeal: true})
+        }
+        else {
+          return response.json();
+        }
+      })
+      .then(result => {
+        if(this.state.disableRandomMeal === false) {
+          let allrecipes = false;
+          let simplyrecipes = false;
+          let tasteofhome = false;
+          result.items.map((item) => {
+            if (!allrecipes && item.displayLink.includes("allrecipes.com")) {
+              this.setState({allrecipes: item.link});
+              allrecipes = true;
+            }
+            if (!simplyrecipes && item.displayLink.includes("simplyrecipes.com")) {
+              this.setState({simplyrecipes: item.link});
+              simplyrecipes = true;
+            }
+            if (!tasteofhome && item.displayLink.includes("tasteofhome.com")) {
+              this.setState({tasteofhome: item.link});
+              tasteofhome = true;
+            }
+            if (allrecipes || simplyrecipes || tasteofhome) {
+              this.setState({randomMeal: ""})
+            }
+            else {
+              this.setState({disableRandomMeal: true})
+            }
+            return result;
+          });
+        }
+      });
+    //fetch('https://www.googleapis.com/customsearch/v1?key=AIzaSyCTP476uPipVIGxjoyRRXkIfMUhlDcboH8&cx=016071729215467533297:y_i4qha-dzc&start=10&q=' + randomMeal + ' recipe')
   }
 
   render() {
@@ -136,18 +182,26 @@ export default class Body extends React.Component {
     let chooseButtonActive = meals.some(meal => meal.props.className !== "inactive") ? " active" : "";
 
     let randomMealChosen = this.state.isMealChosen ? "chosen" : "notChosen";
-    let blur = this.state.isMealChosen ? " on" : " off";
+    let turnBlur = this.state.isMealChosen ? " on" : " off";
+    let allrecipesFound= this.state.allrecipes ? "" : "hidden";
+    let simplyrecipesFound = this.state.simplyrecipes ? "" :"hidden";
+    let tasteofhomeFound = this.state.tasteofhome ? "" : "hidden";
+    let hideRandomMeal = !(allrecipesFound && simplyrecipesFound && tasteofhomeFound) ? "hidden" : "";
+
 
     return(
       <div>
-        <div className={"blur" + blur}/>
+        <div className={"blur" + turnBlur}/>
         <aside className="form">{form}</aside>
         <aside className="meals">{meals}</aside>
         <footer className={"chooseButton" + chooseButtonActive}>
           <button disabled={!chooseButtonActive} onClick={this.chooseMeal}>Choose</button>
         </footer>
         <figure className={randomMealChosen}>
-          <span id="randomMeal">{this.state.randomMeal}</span>
+          <button className={hideRandomMeal} disabled={this.state.disableRandomMeal} id="randomMeal" onClick={this.showLinks}>{this.state.randomMeal}</button>
+          <a className={allrecipesFound} href={this.state.allrecipes.toString()}>AllRecipes.com</a>
+          <a className={simplyrecipesFound} href={this.state.simplyrecipes.toString()}>SimplyRecipes.com</a>
+          <a className={tasteofhomeFound} href={this.state.tasteofhome.toString()}>TasteOfHome.com</a>
           <span className="close" onClick={this.closeChosenMeal}>&times;</span>
         </figure>
       </div>
