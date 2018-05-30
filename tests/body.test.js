@@ -39,6 +39,6 @@ describe('after choose button click', () => {
     expect(body.find('figure').hasClass('chosen')).toBeTruthy();
   });
   it('random meal span is not empty', () => {
-    expect(body.find('figure').find('span#randomMeal').text().length).toBeGreaterThan(0);
+    expect(body.find('figure').find('button#randomMeal').text().length).toBeGreaterThan(0);
   });
 });
