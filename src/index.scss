@@ -6,7 +6,7 @@ html {
 }
 
 body {
-  font-family: sans-serif;
+  font-family: "Comic Sans MS", sans-serif;
   height: 100%;
 }
 
@@ -16,22 +16,22 @@ a {
 }
 
 #root {
-  position: relative;
+  background-color: #8d6e63;
   min-height: 100%;
-}
-
-div.container {
-  margin: 0 auto;
-  max-width: 860px;
-  padding: 20px 20px 50px;
+  position: relative;
 }
 
 h1.pageTitle {
-  border: 4px solid;
-  color: #444;
-  font-size: 30px;
-  margin: 0 0 30px;
-  text-align: center;
+  background-color: #5f4339;
+  color: #ffffff;
+  display: flex;
+  font-weight: bold; font-size: 35px;
+  height: 60px;
+  justify-content: center;
+}
+
+main {
+  display: flex;
 }
 
 div.blur {
@@ -48,51 +48,60 @@ div.blur.on {
 }
 
 @mixin asideHalf {
-  box-sizing: border-box;
-  display: inline-block;
-  vertical-align: top;
-  width: 50%;
+  flex: 1;
+  height: calc(100vh - 120px);
+  overflow: auto;
+  padding: 0 12px;
   text-align: center;
 }
 
 aside.form {
   @include asideHalf;
-  border-right: 1px solid;
+  background-color: #b2ff59;
   padding-bottom: 10px;
-  padding-right: 5px;
 
   p {
-    background-color: #aaaaaa;
-    margin: 10px auto;
+    background-color: #e7ff8c;
+    border: 1px solid; border-radius: 3px;
+    font-size: 19px;
+    margin: 15px 3px 3px;
     padding: 5px 0;
   }
-}
 
-button {
-  background-color: #ffffff;
-  border: 2px solid;
-  cursor: pointer;
-  display: inline-block;
-  margin: 4px 3px;
-  padding: 3px 6px;
-}
+  button {
+    background-color: #7ecb20;
+    border: 1px solid; border-radius: 4px;
+    cursor: pointer;
+    font-family: "Comic Sans MS", sans-serif; font-size: 16px;
+    margin: 3px;
+    padding: 6px 6px;
+    transition: 0.3s;
+  }
 
-button.checked {
-  color: green;
-}
+  button:hover, button.checked:hover {
+    border-color: #ffffff;
+  };
 
-button:disabled {
-  cursor: auto;
+  button.checked {
+    background-color: #e7ff8c;
+  }
+
+  button:last-child {
+    margin-bottom: 18px;
+  }
 }
 
 aside.meals {
   @include asideHalf;
-  padding-left: 5px;
+  background-color: #7ecb20;
+  padding-bottom: 10px;
 
   p {
-    border: solid 2px #000000;
-    margin: 10px auto;
-    padding: 2px 0;
+    background-color: #e7ff8c;
+    border: 1px solid; border-radius: 3px;
+    font-size: 19px;
+    margin: 15px;
+    padding: 5px 0;
   }
 
   p.inactive {
@@ -101,31 +110,38 @@ aside.meals {
 }
 
 footer.chooseButton {
-  background-color: #d5d5d5;
-  border-top: 1px solid;
+  align-items: center; justify-content: center;
+  background-color: #8d6e63;
   bottom: 0; left: 0;
-  box-sizing: border-box;
-  padding: 2px;
+  display: flex;
+  height: 60px;
   position: fixed;
-  text-align: center;
   width: 100%;
 
   button {
-    border-color: #777777;
-    color: #777777;
-    font-weight: bold;
-    margin: 8px auto;
-    padding: 5px 15px;
+    background-color: #b2ff59;
+    font-family: "Comic Sans MS", sans-serif; font-size: 18px;
+    border: 1px solid; border-radius: 4px;
+    padding: 6px 30px;
+    transition: 0.3s;
+  }
+
+  button:disabled {
+    cursor: default;
   }
 }
 
 footer.chooseButton.active {
-  background-color: #35fF42;
+  background-color: #5f4339;
 
   button {
-    border-color: #000000;
-    color: #000000;
+    background-color: #7ecb20;
+    cursor: pointer;
   }
+
+  button:hover {
+    border-color: #ffffff;
+  };
 }
 
 figure.notChosen {
@@ -133,11 +149,11 @@ figure.notChosen {
 }
 
 figure.chosen {
-  background-color: #ffffff;
-  border: 2px solid #000000;
+  align-items: center; justify-content: center;
+  background-color: #e7ff8c;
+  border: 2px solid #000000; border-radius: 15px;
   display: flex;
-  flex-direction: column;
-  justify-content: center; align-items: center;
+  flex-flow: row wrap;
   margin: auto;
   min-height: fit-content; height: 10%; max-height: 120px;
   min-width: fit-content;  width: 30%;  max-width: 210px;
@@ -147,20 +163,30 @@ figure.chosen {
   top: 0; right: 0; bottom: 0; left: 0;
   z-index: 1;
 
-  @mixin inlineVerticalMiddle {
-    display: inline-block;
-    vertical-align: middle;
+  #randomMeal {
+    background-color: #7ecb20;
+    border: 2px solid; border-radius: 4px;
+    cursor: pointer;
+    font-family: "Comic Sans MS", sans-serif; font-size: 18px;
+    margin: 3px;
+    padding: 6px 12px;
+    transition: 0.3s;
   }
 
-  #randomMeal {
-    font-size: 20px;
+  #randomMeal:hover {
+    border-color: #ffffff;
   }
 
   .close {
     cursor: pointer;
     font-size: 30px;
     position: absolute;
-    top: 0; right: 8px;
+    top: 0; right: 17px;
+    transition: 0.3s;
+  }
+
+  .close:hover {
+    color: #7ecb20;
   }
 
   .hidden {
@@ -168,16 +194,23 @@ figure.chosen {
   }
 
   a {
-    border: 2px solid #000000;
+    background-color: #7ecb20;
+    border: 2px solid #000000; border-radius: 4px;
     margin: 5px;
     padding: 3px 6px;
     text-decoration: underline;
+    transition: 0.3s;
+  }
+
+  a:hover {
+    border-color: #ffffff;
   }
 }
 
-@media (min-width: 650px) {
-  .form p,
-  .meals p {
-    max-width: 300px;
+@media (min-width: 320px) {
+  aside.form {
+    button {
+      padding: 6px 12px;
+    }
   }
 }
