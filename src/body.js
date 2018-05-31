@@ -6,72 +6,109 @@ export default class Body extends React.Component {
     super(props);
     this.state = {
       form: [
-        {type: "question",  content: "Calories / 100g"},
-        {type: "answer",    content: "Less than 100",  isChecked: false},
-        {type: "answer",    content: "100 - 300",      isChecked: false},
-        {type: "answer",    content: "More than 300",  isChecked: false},
+        {type: "question",  content: "Preparation time [mins]"},
+        {type: "answer",    content: "Less than 10",   isChecked: false},
+        {type: "answer",    content: "10 - 20",        isChecked: false},
+        {type: "answer",    content: "More than 20",   isChecked: false},
+        {type: "question",  content: "Temperature"},
+        {type: "answer",    content: "Hot",            isChecked: false},
+        {type: "answer",    content: "Cold",           isChecked: false},
         {type: "question",  content: "Flavor"},
         {type: "answer",    content: "Salty",          isChecked: false},
         {type: "answer",    content: "Sweet",          isChecked: false},
         {type: "answer",    content: "Spicy",          isChecked: false},
-        {type: "answer",    content: "Bitter",         isChecked: false},
-        {type: "answer",    content: "Sour",           isChecked: false},
-        {type: "question",  content: "Preparation time [mins]"},
-        {type: "answer",    content: "Less than 5",    isChecked: false},
-        {type: "answer",    content: "5 - 15",         isChecked: false},
-        {type: "answer",    content: "More than 15",   isChecked: false},
-        {type: "question",  content: "Difficulty level"},
-        {type: "answer",    content: "Easy",           isChecked: false},
-        {type: "answer",    content: "Medium",         isChecked: false},
-        {type: "answer",    content: "Hard",           isChecked: false},
-        {type: "answer",    content: "Very hard",      isChecked: false},
-        {type: "question",  content: "Temperature"},
-        {type: "answer",    content: "Hot",            isChecked: false},
-        {type: "answer",    content: "Cold",           isChecked: false},
+        {type: "question",  content: "Calories / serving"},
+        {type: "answer",    content: "Less than 100",  isChecked: false},
+        {type: "answer",    content: "100 - 300",      isChecked: false},
+        {type: "answer",    content: "More than 300",  isChecked: false},
         {type: "question",  content: "Macros"},
         {type: "answer",    content: "High carb",      isChecked: false},
         {type: "answer",    content: "High fat",       isChecked: false},
         {type: "answer",    content: "High protein",   isChecked: false}
       ],
       meals: [
-        { name: "Beef curry",
-          properties: ["100 - 300", "Salty", "More than 15", "Hard", "Hot", "High protein"],
+        { name: "Apple pie",
+          properties: ["More than 20", "Hot", "Cold", "Sweet", "More than 300", "High carb", "High fat"],
           isActive: false
         },
-        { name: "Cereal flakes",
-          properties: ["More than 300", "Sweet", "Less than 5", "Easy", "Cold", "High carb"],
+        { name: "Burger",
+          properties: ["10 - 20", "Hot", "Salty", "More than 300", "High fat", "High protein"],
+          isActive: false
+        },
+        { name: "Casserole",
+          properties: ["More than 20", "Hot", "Salty", "More than 300", "High fat"],
+          isActive: false
+        },
+        { name: "Cereal",
+          properties: ["Less than 10", "Cold", "Sweet", "100 - 300", "High carb"],
           isActive: false
         },
         { name: "Cheesecake",
-          properties: ["More than 300", "Sweet", "More than 15", "Medium", "Cold", "High fat"],
+          properties: ["More than 20", "Cold", "Sweet", "More than 300", "High carb", "High fat"],
+          isActive: false
+        },
+        { name: "Chicken with rice",
+          properties: ["10 - 20", "Hot", "Salty", "Spicy", "More than 300", "High carb", "High protein"],
+          isActive: false
+        },
+        { name: "Drop scones",
+          properties: ["Less than 10", "Hot", "Sweet", "100 - 300", "High carb"],
+          isActive: false
+        },
+        { name: "Kebab",
+          properties: ["More than 20", "Hot", "Salty", "Spicy", "More than 300", "High fat", "High protein"],
           isActive: false
         },
         { name: "Lasagne bolognese",
-          properties: ["100 - 300", "Salty", "More than 15", "Very hard", "Hot", "High fat"],
+          properties: ["More than 20", "Hot", "Salty", "More than 300", "High carb", "High fat"],
+          isActive: false
+        },
+        { name: "Letcho",
+          properties: ["10 - 20", "Hot", "Salty", "Spicy",  "100 - 300", "High fat"],
+          isActive: false
+        },
+        { name: "Omelette",
+          properties: ["Less than 10", "Hot", "Salty", "Sweet", "Less than 100", "High fat"],
           isActive: false
         },
         { name: "Pancakes",
-          properties: ["100 - 300", "Sweet", "5 - 15", "Medium", "Hot", "High carb", "High protein"],
+          properties: ["Less than 10", "Hot", "Sweet", "100 - 300", "High carb"],
           isActive: false
         },
         { name: "Pizza",
-          properties: ["100 - 300", "Salty", "More than 15", "Medium", "Hot", "High carb"],
+          properties: ["More than 20", "Hot", "Salty", "Spicy", "More than 300", "High carb", "High fat"],
           isActive: false
         },
         { name: "Pork chop",
-          properties: ["100 - 300", "Salty", "More than 15", "Medium", "Hot", "High carb"],
+          properties: ["10 - 20", "Hot", "Salty", "More than 300", "High fat", "High protein"],
+          isActive: false
+        },
+        { name: "Porridge",
+          properties: ["Less than 10", "Hot", "Sweet", "Less than 100", "High carb"],
+          isActive: false
+        },
+        { name: "Potato pancakes",
+          properties: ["10 - 20", "Hot", "Salty", "100 - 300", "High carb", "High fat"],
           isActive: false
         },
         { name: "Salmon penne",
-          properties: ["100 - 300", "Salty", "More than 15", "Medium", "Hot", "High protein", "High carb"],
+          properties: ["10 - 20", "Hot", "Salty", "More than 300", "High fat", "High protein"],
+          isActive: false
+        },
+        { name: "Scrambled eggs",
+          properties: ["Less than 10", "Hot", "Salty", "Less than 100", "High fat", "High protein"],
+          isActive: false
+        },
+        { name: "Spaghetti bolognese",
+          properties: ["More than 20", "Hot", "Salty", "100 - 300", "High carb"],
           isActive: false
         },
         { name: "Tiramisu",
-          properties: ["100 - 300", "Sweet", "More than 15", "Hard", "Cold", "High fat"],
+          properties: ["More than 20", "Cold", "Sweet", "More than 300", "High carb", "High fat"],
           isActive: false
         },
-        { name: "Tuna Mornay",
-          properties: ["Less than 100", "Salty", "More than 15", "Medium", "Hot", "High carb"],
+        { name: "Toasts",
+          properties: ["Less than 10", "Hot", "Salty", "Less than 100", "High carb"],
           isActive: false
         }
       ],
@@ -159,7 +196,6 @@ export default class Body extends React.Component {
           });
         }
       });
-    //fetch('https://www.googleapis.com/customsearch/v1?key=AIzaSyCTP476uPipVIGxjoyRRXkIfMUhlDcboH8&cx=016071729215467533297:y_i4qha-dzc&start=10&q=' + randomMeal + ' recipe')
   }
 
   render() {
@@ -190,9 +226,9 @@ export default class Body extends React.Component {
 
 
     return(
-      <div>
+      <main>
         <div className={"blur" + turnBlur}/>
-        <aside className="form">{form}</aside>
+        <aside className="form"><h1 className="selectTip">Select at least one <img alt="arrow down" src="arrow_down.png"/></h1>{form}</aside>
         <aside className="meals">{meals}</aside>
         <footer className={"chooseButton" + chooseButtonActive}>
           <button disabled={!chooseButtonActive} onClick={this.chooseMeal}>Choose</button>
@@ -204,7 +240,7 @@ export default class Body extends React.Component {
           <a className={tasteofhomeFound} href={this.state.tasteofhome.toString()}>TasteOfHome.com</a>
           <span className="close" onClick={this.closeChosenMeal}>&times;</span>
         </figure>
-      </div>
+      </main>
     )
   }
 }
