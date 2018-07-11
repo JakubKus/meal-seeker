@@ -1,5 +1,9 @@
 import React from "react";
-import SingleButton from './singleButton';
+import Form from './form';
+import Meals from "./meals";
+import Footer from "./footer";
+import RandomMealPopup from "./randomMealPopup";
+import Blur from "./blur";
 
 export default class Body extends React.Component {
   constructor(props) {
@@ -119,127 +123,109 @@ export default class Body extends React.Component {
       simplyrecipes: false,
       tasteofhome: false
     };
-    this.showMeals = this.showMeals.bind(this);
-    this.chooseMeal = this.chooseMeal.bind(this);
-    this.closeChosenMeal = this.closeChosenMeal.bind(this);
-    this.showLinks = this.showLinks.bind(this);
   }
 
-  toggleAnswer(answerIndex) {
-    let formElement = this.state.form[answerIndex];
-    let updatedForm = this.state.form;
-    updatedForm.splice(answerIndex, 1, {type: formElement.type, content: formElement.content, isChecked: formElement.isChecked === false});
+  toggleAnswer = (answerIndex) => {
+    const formElement = this.state.form[answerIndex];
+    const updatedForm = this.state.form;
+    updatedForm.splice(answerIndex, 1, {
+      ...formElement,
+      isChecked: formElement.isChecked === false
+    });
     this.setState({form: updatedForm}, this.showMeals)
-  }
+  };
 
-  showMeals() {
-    let showMeal;
-    let updatedMeals = this.state.meals.map((meal) => {
-      showMeal = "unknown";
-      this.state.form.map((formProperty) => {
-        if (showMeal)
-          if (formProperty.type === "answer")
-            if (formProperty.isChecked)
-              showMeal = meal.properties.some(mealProperty => mealProperty === formProperty.content);
-        return showMeal;
-      });
-      return {name: meal.name, isActive: showMeal === true, properties: meal.properties}
+  showMeals = () => {
+    const selectedProperties = [];
+    this.state.form.forEach(formProperty => {
+      if(formProperty.type === "answer")
+        if(formProperty.isChecked)
+          selectedProperties.push(formProperty.content)
+    });
+    const updatedMeals = this.state.meals.map(meal => {
+      if(selectedProperties.length) {
+        let shouldShowMeal = selectedProperties.every(selectedProperty => {
+          return meal.properties.includes(selectedProperty);
+        });
+        return {...meal, isActive: shouldShowMeal}
+      }
+      else return {...meal, isActive: false}
     });
     this.setState({meals: updatedMeals})
-  }
+  };
 
-  chooseMeal() {
-    let activeMeals = this.state.meals.filter(activeMeal => activeMeal.isActive === true);
-    let randomMeal = (activeMeals.length > 0) && activeMeals[Math.floor(Math.random() * activeMeals.length)].name;
+  chooseMeal = () => {
+    const activeMeals = this.state.meals.filter(activeMeal =>
+      activeMeal.isActive
+    );
+    const activeMealsNum = activeMeals.length;
+    const randomMealIndex = Math.floor(Math.random() * activeMealsNum);
+    const randomMeal = activeMealsNum && activeMeals[randomMealIndex].name;
     this.setState({isMealChosen: true, randomMeal: randomMeal});
-  }
+  };
 
-  closeChosenMeal() {
-    this.setState({isMealChosen: false, randomMeal: "", disableRandomMeal: false, allrecipes: false, simplyrecipes: false, tasteofhome: false})
-  }
+  closeChosenMeal = () => {
+    this.setState({
+      isMealChosen: false,
+      randomMeal: "",
+      disableRandomMeal: false,
+      allrecipes: false,
+      simplyrecipes: false,
+      tasteofhome: false
+    })
+  };
 
-  showLinks() {
-    fetch('https://www.googleapis.com/customsearch/v1?key=AIzaSyCTP476uPipVIGxjoyRRXkIfMUhlDcboH8&cx=016071729215467533297:y_i4qha-dzc&q=' + this.state.randomMeal + ' recipe')
+  showLinks = () => {
+    fetch(`https://www.googleapis.com/customsearch/v1?key=AIzaSyCTP476uPipVIGxjoyRRXkIfMUhlDcboH8&cx=016071729215467533297:y_i4qha-dzc&q=${this.state.randomMeal} recipe`)
       .then(response => {
-        if (response.status !== 200) {
-          this.setState({disableRandomMeal: true})
-        }
-        else {
+        if (response.status.ok)
+          this.setState({disableRandomMeal: true});
+        else
           return response.json();
-        }
       })
       .then(result => {
         if(this.state.disableRandomMeal === false) {
-          let allrecipes = false;
-          let simplyrecipes = false;
-          let tasteofhome = false;
-          result.items.map((item) => {
-            if (!allrecipes && item.displayLink.includes("allrecipes.com")) {
+          const allrecipes = this.state.allrecipes;
+          const simplyrecipes = this.state.simplyrecipes;
+          const tasteofhome = this.state.tasteofhome;
+          result.items.forEach((item) => {
+            const resultLink = item.displayLink;
+            if (!allrecipes && resultLink.includes("allrecipes.com"))
               this.setState({allrecipes: item.link});
-              allrecipes = true;
-            }
-            if (!simplyrecipes && item.displayLink.includes("simplyrecipes.com")) {
+            if (!simplyrecipes && resultLink.includes("simplyrecipes.com"))
               this.setState({simplyrecipes: item.link});
-              simplyrecipes = true;
-            }
-            if (!tasteofhome && item.displayLink.includes("tasteofhome.com")) {
+            if (!tasteofhome && resultLink.includes("tasteofhome.com"))
               this.setState({tasteofhome: item.link});
-              tasteofhome = true;
-            }
-            if (allrecipes || simplyrecipes || tasteofhome) {
-              this.setState({randomMeal: ""})
-            }
-            else {
-              this.setState({disableRandomMeal: true})
-            }
-            return result;
+            if (allrecipes || simplyrecipes || tasteofhome)
+              this.setState({randomMeal: ""});
+            else
+              this.setState({disableRandomMeal: true});
           });
         }
       });
-  }
+  };
 
   render() {
-    let form = this.state.form.map((element, index) => {
-      return (
-        element.type === "answer" ?
-          <SingleButton answer={element.content}
-                        toggleAnswer={this.toggleAnswer.bind(this, index)}
-                        isChecked={this.state.form[index].isChecked}
-                        key={index}
-          />
-          :
-          <p key={index}>{element.content}</p>
-      )
-    });
 
-    let meals = this.state.meals.map((element, index) => {
-      return <p key={index} className={element.isActive ? "" : "inactive"}>{element.name}</p>
-    });
-    let chooseButtonActive = meals.some(meal => meal.props.className !== "inactive") ? " active" : "";
-
-    let randomMealChosen = this.state.isMealChosen ? "chosen" : "notChosen";
-    let turnBlur = this.state.isMealChosen ? " on" : " off";
-    let allrecipesFound= this.state.allrecipes ? "" : "hidden";
-    let simplyrecipesFound = this.state.simplyrecipes ? "" :"hidden";
-    let tasteofhomeFound = this.state.tasteofhome ? "" : "hidden";
-    let hideRandomMeal = !(allrecipesFound && simplyrecipesFound && tasteofhomeFound) ? "hidden" : "";
-
-
-    return(
+    return (
       <main>
-        <div className={"blur" + turnBlur}/>
-        <aside className="form"><h1 className="selectTip">Select at least one <img alt="arrow down" src="arrow_down.png"/></h1>{form}</aside>
-        <aside className="meals">{meals}</aside>
-        <footer className={"chooseButton" + chooseButtonActive}>
-          <button disabled={!chooseButtonActive} onClick={this.chooseMeal}>Choose</button>
-        </footer>
-        <figure className={randomMealChosen}>
-          <button className={hideRandomMeal} disabled={this.state.disableRandomMeal} id="randomMeal" onClick={this.showLinks}>{this.state.randomMeal}</button>
-          <a className={allrecipesFound} href={this.state.allrecipes.toString()}>AllRecipes.com</a>
-          <a className={simplyrecipesFound} href={this.state.simplyrecipes.toString()}>SimplyRecipes.com</a>
-          <a className={tasteofhomeFound} href={this.state.tasteofhome.toString()}>TasteOfHome.com</a>
-          <span className="close" onClick={this.closeChosenMeal}>&times;</span>
-        </figure>
+        <Blur isMealChosen={this.state.isMealChosen}/>
+        <Form form={this.state.form}
+              toggleAnswer={this.toggleAnswer}
+        />
+        <Meals meals={this.state.meals}/>
+        <Footer meals={this.state.meals}
+                chooseMeal={this.chooseMeal}
+        />
+        <RandomMealPopup isMealChosen={this.state.isMealChosen}
+                         allrecipes={this.state.allrecipes}
+                         simplyrecipes={this.state.simplyrecipes}
+                         tasteofhome={this.state.tasteofhome}
+                         randomMeal={this.state.randomMeal}
+                         disableRandomMeal={this.state.disableRandomMeal}
+                         showLinks={this.showLinks}
+                         closeChosenMeal={this.closeChosenMeal}
+        />
       </main>
     )
   }
