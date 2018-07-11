@@ -1,0 +1,67 @@
+figure.notChosen {
+  display: none;
+}
+
+figure.chosen {
+  align-items: center; justify-content: center;
+  background-color: #e7ff8c;
+  border: 2px solid #000000; border-radius: 15px;
+  display: flex;
+  flex-flow: row wrap;
+  margin: auto;
+  min-height: fit-content; height: 10%; max-height: 120px;
+  min-width: fit-content;  width: 30%;  max-width: 210px;
+  padding: 30px 40px 15px;
+  position: fixed;
+  text-align: center;
+  top: 0; right: 0; bottom: 0; left: 0;
+  z-index: 1;
+
+  #randomMeal {
+    background-color: #7ecb20;
+    border: 2px solid; border-radius: 4px;
+    cursor: pointer;
+    font-family: "Comic Sans MS", sans-serif; font-size: 18px;
+    margin: 3px;
+    padding: 6px 12px;
+    transition: 0.3s;
+  }
+
+  #randomMeal:hover {
+    border-color: #ffffff;
+  }
+
+  #randomMeal:disabled:hover {
+    border-color: initial;
+    cursor: default;
+  }
+
+  .close {
+    cursor: pointer;
+    font-size: 30px;
+    position: absolute;
+    top: 0; right: 17px;
+    transition: 0.3s;
+  }
+
+  .close:hover {
+    color: #7ecb20;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  a {
+    background-color: #7ecb20;
+    border: 2px solid #000000; border-radius: 4px;
+    margin: 5px;
+    padding: 3px 6px;
+    text-decoration: underline;
+    transition: 0.3s;
+  }
+
+  a:hover {
+    border-color: #ffffff;
+  }
+}

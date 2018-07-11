@@ -1,0 +1,31 @@
+aside.meals {
+  background-color: #7ecb20;
+  flex: 1;
+  height: calc(100vh - 120px);
+  overflow: auto;
+  padding: 0 12px;
+  text-align: center;
+
+  p {
+    background-color: #e7ff8c;
+    border: 1px solid; border-radius: 3px;
+    font-size: 19px;
+    margin: 15px 0;
+    padding: 5px 6px;
+  }
+
+  @media (min-width: 400px) {
+
+    p {
+      margin: 15px;
+    }
+  }
+
+  p.inactive {
+    display: none;
+  }
+
+  div.filler {
+    height: 45px;
+  }
+}
