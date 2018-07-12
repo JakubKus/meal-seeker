@@ -2,8 +2,15 @@ figure.notChosen {
   display: none;
 }
 
+@keyframes slideUp {
+  0% { bottom: -200px; }
+  100% { bottom: 0; }
+}
+
 figure.chosen {
   align-items: center; justify-content: center;
+  animation: slideUp 0.7s ease-out;
+  animation-fill-mode: both;
   background-color: #e7ff8c;
   border: 2px solid #000000; border-radius: 15px;
   display: flex;
@@ -25,27 +32,28 @@ figure.chosen {
     margin: 3px;
     padding: 6px 12px;
     transition: 0.3s;
-  }
 
-  #randomMeal:hover {
-    border-color: #ffffff;
-  }
+    &:hover {
+      border-color: #ffffff;
+    }
 
-  #randomMeal:disabled:hover {
-    border-color: initial;
-    cursor: default;
+    &:disabled:hover {
+      border-color: initial;
+      cursor: default;
+    }
   }
 
   .close {
     cursor: pointer;
     font-size: 30px;
+    opacity: 1;
     position: absolute;
     top: 0; right: 17px;
     transition: 0.3s;
-  }
 
-  .close:hover {
-    color: #7ecb20;
+    &:hover {
+      color: #7ecb20;
+    }
   }
 
   .hidden {
@@ -59,9 +67,10 @@ figure.chosen {
     padding: 3px 6px;
     text-decoration: underline;
     transition: 0.3s;
-  }
 
-  a:hover {
-    border-color: #ffffff;
+    &:hover {
+      border-color: #ffffff;
+      color: #000;
+    }
   }
 }
