@@ -17,8 +17,14 @@ a {
   background-color: #8d6e63;
 }
 
+@keyframes appear {
+  0% { background-color: #e7ff8c; color: #e7ff8c; }
+  100% { background-color: #5f4339; color: #fff; }
+}
+
 h1.pageTitle {
   align-items: center; justify-content: center;
+  animation: appear 0.8s ease-in 0s 1 normal both;
   background-color: #5f4339;
   color: #ffffff;
   display: flex;
@@ -33,12 +39,12 @@ main {
 div.blur {
   position: fixed;
   top: 0; left: 0;
-}
 
-div.blur.on {
-  background-color: #000000;
-  height: 100%;
-  opacity: 0.4;
-  width: 100%;
-  z-index: 1;
+  &.on {
+    background-color: #000000;
+    height: 100%;
+    opacity: 0.4;
+    width: 100%;
+    z-index: 1;
+  }
 }
