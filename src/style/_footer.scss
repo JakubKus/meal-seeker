@@ -7,28 +7,35 @@ footer.chooseButton {
   position: fixed;
   width: 100%;
 
+  &.active {
+    background-color: #5f4339;
+
+    button {
+      background-color: #7ecb20;
+      cursor: pointer;
+    }
+
+    button:hover {
+      border-color: #ffffff;
+    };
+  }
+
+  @keyframes rotate {
+    0% { transform: rotate(180deg); }
+    100% { transform: rotate(0deg); opacity: 1; }
+  }
+
   button {
+    animation: rotate 0.4s linear 4.6s 1 normal both;
     background-color: #e7ff8c;
     font-family: "Comic Sans MS", sans-serif; font-size: 18px;
     border: 1px solid; border-radius: 4px;
+    opacity: 0;
     padding: 6px 30px;
     transition: 0.3s;
+
+    &:disabled {
+      cursor: default;
+    }
   }
-
-  button:disabled {
-    cursor: default;
-  }
-}
-
-footer.chooseButton.active {
-  background-color: #5f4339;
-
-  button {
-    background-color: #7ecb20;
-    cursor: pointer;
-  }
-
-  button:hover {
-    border-color: #ffffff;
-  };
 }
