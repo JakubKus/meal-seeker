@@ -6,23 +6,25 @@ aside.meals {
   padding: 0 12px;
   text-align: center;
 
-  p {
-    background-color: #e7ff8c;
-    border: 1px solid; border-radius: 3px;
-    font-size: 19px;
-    margin: 15px 0;
-    padding: 5px 6px;
+  div.collapse, div.collapsing {
+
+    p {
+      background-color: #e7ff8c;
+      border: 1px solid;
+      border-radius: 3px;
+      font-size: 19px;
+      margin: 15px 0 0;
+      padding: 5px 6px;
+    }
   }
 
   @media (min-width: 400px) {
 
-    p {
-      margin: 15px;
+    div.collapse, div.collapsing {
+      p {
+        margin: 15px 15px 0;
+      }
     }
-  }
-
-  p.inactive {
-    display: none;
   }
 
   div.filler {
