@@ -10,10 +10,10 @@ export default class Form extends React.Component {
                           isChecked={element.isChecked}
                           answer={element.content}
                           key={index}
-                          delay={{"animation-delay": `${index * 0.2 + 0.9}s`}}
+                          delay={{animationDelay: `${index * 0.2 + 0.9}s`}}
             />
           : <p key={index}
-               style={{"animation-delay": `${index * 0.2 + 0.9}s`}}
+               style={{animationDelay: `${index * 0.2 + 0.9}s`}}
             >{element.content}</p>
       )
     });
