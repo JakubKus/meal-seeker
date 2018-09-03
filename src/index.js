@@ -8,7 +8,7 @@ class FoodPicker extends React.Component {
   render() {
     return(
       <div>
-        <h1 className="pageTitle">Food Picker</h1>
+        <h1 className="pageTitle">Meal Seeker</h1>
         <Body/>
       </div>
     )
