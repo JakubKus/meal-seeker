@@ -63,7 +63,7 @@ export default class Body extends React.Component {
           properties: ["More than 20", "Hot", "Salty", "Spicy", "More than 300", "High fat", "High protein"],
           isActive: false
         },
-        { name: "Lasagne bolognese",
+        { name: "Lasagna bolognese",
           properties: ["More than 20", "Hot", "Salty", "More than 300", "High carb", "High fat"],
           isActive: false
         },
