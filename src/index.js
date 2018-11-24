@@ -1,25 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import WebFont from 'webfontloader';
-import './style/index.css';
-import Body from './body';
-
-class FoodPicker extends React.Component {
-  render() {
-    return(
-      <div>
-        <h1 className="pageTitle">Meal Seeker</h1>
-        <Body/>
-      </div>
-    )
-  }
-}
+import ReactGA from 'react-ga';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './style/index.scss';
+import App from './App';
 
 WebFont.load({
   google: {
     families: ['Maven Pro:400', 'sans-serif']
-  }
+  },
 });
 
-ReactDOM.render( <FoodPicker/>, document.getElementById('root') );
+const googleAnalyticsId = process.env.REACT_APP_GOOGLE_ANALYTICS_ID;
+ReactGA.initialize(googleAnalyticsId);
+ReactGA.pageview('/');
+
+ReactDOM.render(<App />, document.getElementById('root'));

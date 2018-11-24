@@ -39,6 +39,7 @@ h1.pageTitle {
 
 main {
   display: flex;
+  flex-flow: column;
 }
 
 div.blur {
@@ -52,4 +53,12 @@ div.blur {
     width: 100%;
     z-index: 1;
   }
+}
+
+div.container {
+  display: flex;
+  margin: 0;
+  max-width: 100%;
+  padding: 0;
+  width: 100%;
 }
