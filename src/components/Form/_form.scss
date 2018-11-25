@@ -3,7 +3,7 @@
 aside.form {
   background-color: $colorGreen;
   flex: 1;
-  height: calc(100vh - 120px);
+  height: calc(100vh - 60px);
   overflow: auto;
   padding: 0 12px;
   text-align: center;
@@ -34,7 +34,7 @@ aside.form {
   }
 
   p {
-    animation: slideMoreRight 0.6s;
+    animation: slideMoreRight 0.5s linear 0.75s;
     animation-fill-mode: both;
     background-color: $colorLightGreen;
     border: 1px solid; border-radius: 3px;
@@ -46,7 +46,7 @@ aside.form {
   }
 
   button {
-    animation: slideRight 0.5s;
+    animation: slideRight 0.4s linear 1.2s;
     animation-fill-mode: both;
     background-color: $colorDarkGreen;
     border: 1px solid; border-radius: 4px;

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Form from '../Form/Form';
 import Meals from '../Meals/Meals';
-import Footer from '../Footer/Footer';
-import RandomMealPopup from '../RandomMealPopup/randomMealPopup';
 
 export default class App extends Component {
   constructor(props) {
@@ -279,9 +277,6 @@ export default class App extends Component {
           isActive: false,
         },
       ],
-      isMealChosen: false,
-      randomMeal: '',
-      disableRandomMeal: false,
       allrecipes: false,
       simplyrecipes: false,
       tasteofhome: false,
@@ -318,26 +313,6 @@ export default class App extends Component {
     });
 
     this.setState({ meals: matchingMeals });
-  };
-
-  chooseMeal = () => {
-    const { meals } = this.state;
-    const activeMeals = meals.filter(activeMeal => activeMeal.isActive);
-    const activeMealsNum = activeMeals.length;
-    const randomMealIndex = Math.floor(Math.random() * activeMealsNum);
-    const randomMeal = activeMealsNum && activeMeals[randomMealIndex].name;
-    this.setState({ isMealChosen: true, randomMeal });
-  };
-
-  closeChosenMeal = () => {
-    this.setState({
-      isMealChosen: false,
-      randomMeal: '',
-      disableRandomMeal: false,
-      allrecipes: false,
-      simplyrecipes: false,
-      tasteofhome: false,
-    });
   };
 
   showLinks = () => {
@@ -381,35 +356,20 @@ export default class App extends Component {
 
   render() {
     const {
-      isMealChosen,
       form,
       meals,
       allrecipes,
       simplyrecipes,
       tasteofhome,
-      randomMeal,
-      disableRandomMeal,
     } = this.state;
 
     return (
       <main>
         <header><h1 className="pageTitle">Meal Seeker</h1></header>
-        <div className={isMealChosen ? 'blur on' : 'blur off'} />
         <div className="container">
           <Form form={form} toggleAnswer={this.toggleAnswer} />
           <Meals meals={meals} />
         </div>
-        <Footer meals={meals} chooseMeal={this.chooseMeal} />
-        <RandomMealPopup
-          isMealChosen={isMealChosen}
-          allrecipes={allrecipes}
-          simplyrecipes={simplyrecipes}
-          tasteofhome={tasteofhome}
-          randomMeal={randomMeal}
-          disableRandomMeal={disableRandomMeal}
-          showLinks={this.showLinks}
-          closeChosenMeal={this.closeChosenMeal}
-        />
       </main>
     );
   }
