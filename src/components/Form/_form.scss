@@ -1,5 +1,7 @@
+@import '../../colors';
+
 aside.form {
-  background-color: #b2ff59;
+  background-color: $colorGreen;
   flex: 1;
   height: calc(100vh - 120px);
   overflow: auto;
@@ -34,7 +36,7 @@ aside.form {
   p {
     animation: slideMoreRight 0.6s;
     animation-fill-mode: both;
-    background-color: #e7ff8c;
+    background-color: $colorLightGreen;
     border: 1px solid; border-radius: 3px;
     font-size: 19px;
     margin: 15px 3px 3px;
@@ -46,7 +48,7 @@ aside.form {
   button {
     animation: slideRight 0.5s;
     animation-fill-mode: both;
-    background-color: #7ecb20;
+    background-color: $colorDarkGreen;
     border: 1px solid; border-radius: 4px;
     cursor: pointer;
     font-family: "Maven Pro", sans-serif; font-size: 16px;
@@ -57,11 +59,11 @@ aside.form {
     transition: 0.3s;
 
     &:hover, &.checked:hover {
-      border-color: #ffffff;
+      border-color: #fff;
     }
 
     &.checked {
-      background-color: #e7ff8c;
+      background-color: $colorLightGreen;
     }
 
     &:last-child {

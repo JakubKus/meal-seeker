@@ -1,3 +1,5 @@
+@import '../../colors';
+
 figure.notChosen {
   display: none;
 }
@@ -11,8 +13,8 @@ figure.chosen {
   align-items: center; justify-content: center;
   animation: slideUp 0.7s ease-out;
   animation-fill-mode: both;
-  background-color: #e7ff8c;
-  border: 2px solid #000000; border-radius: 15px;
+  background-color: $colorLightGreen;
+  border: 2px solid #000; border-radius: 15px;
   display: flex;
   flex-flow: row wrap;
   margin: auto;
@@ -25,7 +27,7 @@ figure.chosen {
   z-index: 1;
 
   #randomMeal {
-    background-color: #7ecb20;
+    background-color: $colorDarkGreen;
     border: 2px solid; border-radius: 4px;
     cursor: pointer;
     font-family: "Maven Pro", sans-serif; font-size: 18px;
@@ -34,7 +36,7 @@ figure.chosen {
     transition: 0.3s;
 
     &:hover {
-      border-color: #ffffff;
+      border-color: #fff;
     }
 
     &:disabled:hover {
@@ -52,7 +54,7 @@ figure.chosen {
     transition: 0.3s;
 
     &:hover {
-      color: #7ecb20;
+      color: $colorDarkGreen;
     }
   }
 
@@ -61,15 +63,15 @@ figure.chosen {
   }
 
   a {
-    background-color: #7ecb20;
-    border: 2px solid #000000; border-radius: 4px;
+    background-color: $colorDarkGreen;
+    border: 2px solid #000; border-radius: 4px;
     margin: 5px;
     padding: 3px 6px;
     text-decoration: underline;
     transition: 0.3s;
 
     &:hover {
-      border-color: #ffffff;
+      border-color: #fff;
       color: #000;
     }
   }
