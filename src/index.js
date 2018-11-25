@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import WebFont from 'webfontloader';
 import ReactGA from 'react-ga';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './style/index.scss';
-import App from './App';
+import './index.scss';
+import App from './components/App/App';
 
 WebFont.load({
   google: {
