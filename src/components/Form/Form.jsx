@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import AnswerButton from './AnswerButton';
+import AnswerButton from '../AnswerButton/AnswerButton';
 
 const Form = ({ form, toggleAnswer }) => (
   <aside className="form">

@@ -1,0 +1,54 @@
+@import '../../colors';
+
+@keyframes appear {
+  0% { background-color: $colorLightGreen; color: $colorLightGreen; }
+  100% { background-color: $colorBrown; color: #fff; }
+}
+
+main {
+  display: flex;
+  flex-flow: column;
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  button, button:focus {
+    outline: none;
+  }
+
+  h1.pageTitle {
+    align-items: center;
+    justify-content: center;
+    animation: appear 0.8s ease-in 0s 1 normal both;
+    background-color: $colorBrown;
+    color: #fff;
+    display: flex;
+    font-weight: bold;
+    font-size: 35px;
+    height: 60px;
+  }
+
+  div.blur {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    &.on {
+      background-color: #000;
+      height: 100%;
+      opacity: 0.4;
+      width: 100%;
+      z-index: 1;
+    }
+  }
+
+  div.container {
+    display: flex;
+    margin: 0;
+    max-width: 100%;
+    padding: 0;
+    width: 100%;
+  }
+}

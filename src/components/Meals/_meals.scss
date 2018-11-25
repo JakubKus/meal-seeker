@@ -1,5 +1,7 @@
+@import '../../colors';
+
 aside.meals {
-  background-color: #7ecb20;
+  background-color: $colorDarkGreen;
   flex: 1;
   height: calc(100vh - 120px);
   overflow: auto;
@@ -9,7 +11,7 @@ aside.meals {
   div.collapse, div.collapsing {
 
     p {
-      background-color: #e7ff8c;
+      background-color: $colorLightGreen;
       border: 1px solid;
       border-radius: 3px;
       font-size: 19px;

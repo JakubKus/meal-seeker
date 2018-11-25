@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Form from './Form';
-import Meals from './Meals';
-import Footer from './Footer';
-import RandomMealPopup from './randomMealPopup';
+import Form from '../Form/Form';
+import Meals from '../Meals/Meals';
+import Footer from '../Footer/Footer';
+import RandomMealPopup from '../RandomMealPopup/randomMealPopup';
 
 export default class App extends Component {
   constructor(props) {
