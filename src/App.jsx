@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import Form from './form';
-import Meals from './meals';
-import Footer from './footer';
+import Form from './Form';
+import Meals from './Meals';
+import Footer from './Footer';
 import RandomMealPopup from './randomMealPopup';
-import Blur from './blur';
 
 export default class App extends Component {
   constructor(props) {
@@ -394,21 +393,13 @@ export default class App extends Component {
 
     return (
       <main>
-        <header>
-          <h1 className="pageTitle">Meal Seeker</h1>
-        </header>
-        <Blur isMealChosen={isMealChosen} />
+        <header><h1 className="pageTitle">Meal Seeker</h1></header>
+        <div className={isMealChosen ? 'blur on' : 'blur off'} />
         <div className="container">
-          <Form
-            form={form}
-            toggleAnswer={this.toggleAnswer}
-          />
+          <Form form={form} toggleAnswer={this.toggleAnswer} />
           <Meals meals={meals} />
         </div>
-        <Footer
-          meals={meals}
-          chooseMeal={this.chooseMeal}
-        />
+        <Footer meals={meals} chooseMeal={this.chooseMeal} />
         <RandomMealPopup
           isMealChosen={isMealChosen}
           allrecipes={allrecipes}
