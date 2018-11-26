@@ -8,6 +8,7 @@ const Meals = ({
   clickedMealIndex,
   links,
   fetching,
+  gaEvent,
 }) => (
   <aside className="meals">
     {
@@ -16,7 +17,12 @@ const Meals = ({
           {
             clickedMealIndex !== index
               ? (
-                <button onClick={() => showLinks(element.name, index)}>
+                <button
+                  onClick={() => {
+                    gaEvent('Meal', element.name);
+                    showLinks(element.name, index);
+                  }}
+                >
                   {element.name}
                 </button>
               )
@@ -52,6 +58,7 @@ Meals.propTypes = {
   clickedMealIndex: PropTypes.number.isRequired,
   links: PropTypes.instanceOf(Array).isRequired,
   fetching: PropTypes.instanceOf(Object).isRequired,
+  gaEvent: PropTypes.func.isRequired,
 };
 
 export default Meals;
