@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactGA from 'react-ga';
 import Form from '../Form/Form';
 import Meals from '../Meals/Meals';
 
@@ -348,6 +349,10 @@ export default class App extends Component {
       });
   };
 
+  gaEvent = (category, action) => {
+    ReactGA.event({ category, action });
+  };
+
   render() {
     const {
       form,
@@ -361,13 +366,18 @@ export default class App extends Component {
       <main>
         <header><h1 className="pageTitle">Meal Seeker</h1></header>
         <div className="container">
-          <Form form={form} toggleAnswer={this.toggleAnswer} />
+          <Form
+            form={form}
+            toggleAnswer={this.toggleAnswer}
+            gaEvent={this.gaEvent}
+          />
           <Meals
             meals={meals}
             showLinks={this.showLinks}
             clickedMealIndex={clickedMealIndex}
             links={links}
             fetching={fetching}
+            gaEvent={this.gaEvent}
           />
         </div>
       </main>
