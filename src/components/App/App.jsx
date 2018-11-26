@@ -277,9 +277,9 @@ export default class App extends Component {
           isActive: false,
         },
       ],
-      allrecipes: false,
-      simplyrecipes: false,
-      tasteofhome: false,
+      clickedMealIndex: -1,
+      links: [],
+      fetching: { error: false, inProgress: false },
     };
   }
 
@@ -315,42 +315,36 @@ export default class App extends Component {
     this.setState({ meals: matchingMeals });
   };
 
-  showLinks = () => {
-    const {
-      randomMeal,
-      disableRandomMeal,
-      allrecipes,
-      simplyrecipes,
-      tasteofhome,
-    } = this.state;
-
+  showLinks = (meal, index) => {
     const googleSearchKey = process.env.REACT_APP_GOOGLE_SEARCH_KEY;
-    fetch(`https://www.googleapis.com/customsearch/v1?key=${googleSearchKey}=${randomMeal} recipe`)
+    this.setState({ clickedMealIndex: index, fetching: { inProgress: true } });
+
+    fetch(`https://www.googleapis.com/customsearch/v1?key=${googleSearchKey}=${meal} recipe`)
       .then(response => (
         response.ok
           ? response.json()
-          : this.setState({ disableRandomMeal: true })
+          : this.setState({ fetching: { inProgress: false } })
       ))
       .then((result) => {
-        if (disableRandomMeal === false) {
-          result.items.forEach((item) => {
-            const resultLink = item.displayLink;
-            if (!allrecipes && resultLink.includes('allrecipes.com')) {
-              this.setState({ allrecipes: item.link });
-            }
-            if (!simplyrecipes && resultLink.includes('simplyrecipes.com')) {
-              this.setState({ simplyrecipes: item.link });
-            }
-            if (!tasteofhome && resultLink.includes('tasteofhome.com')) {
-              this.setState({ tasteofhome: item.link });
-            }
-            if (allrecipes || simplyrecipes || tasteofhome) {
-              this.setState({ randomMeal: '' });
-            } else {
-              this.setState({ disableRandomMeal: true });
-            }
-          });
-        }
+        const links = [];
+        result.items.forEach((item) => {
+          if (
+            item.displayLink.includes('allrecipes.com')
+            || item.displayLink.includes('simplyrecipes.com')
+            || item.displayLink.includes('tasteofhome.com')
+          ) {
+            links.push(item.link);
+          }
+        });
+        this.setState(
+          links.length
+            ? { links, fetching: { inProgress: false } }
+            : { links, fetching: { inProgress: false, error: true } },
+        );
+      })
+      .catch((e) => {
+        this.setState({ fetching: { error: true, inProgress: false } });
+        console.log(e.message);
       });
   };
 
@@ -358,9 +352,9 @@ export default class App extends Component {
     const {
       form,
       meals,
-      allrecipes,
-      simplyrecipes,
-      tasteofhome,
+      clickedMealIndex,
+      links,
+      fetching,
     } = this.state;
 
     return (
@@ -368,7 +362,13 @@ export default class App extends Component {
         <header><h1 className="pageTitle">Meal Seeker</h1></header>
         <div className="container">
           <Form form={form} toggleAnswer={this.toggleAnswer} />
-          <Meals meals={meals} />
+          <Meals
+            meals={meals}
+            showLinks={this.showLinks}
+            clickedMealIndex={clickedMealIndex}
+            links={links}
+            fetching={fetching}
+          />
         </div>
       </main>
     );
