@@ -287,16 +287,19 @@ export default class App extends Component {
   toggleAnswer = (answerIndex) => {
     const { form } = this.state;
     const answer = form[answerIndex];
+
     form.splice(answerIndex, 1, {
       ...answer,
       isChecked: answer.isChecked === false,
     });
+
     this.setState({ form }, this.showMeals);
   };
 
   showMeals = () => {
     const { form, meals } = this.state;
     const selectedProperties = [];
+
     form.forEach((formProperty) => {
       if (formProperty.type === 'answer' && formProperty.isChecked) {
         selectedProperties.push(formProperty.content);
@@ -305,10 +308,10 @@ export default class App extends Component {
 
     const matchingMeals = meals.map((meal) => {
       if (selectedProperties.length) {
-        const doesMealActivate = selectedProperties.every(selectedProperty => (
+        const shouldActivate = selectedProperties.every(selectedProperty => (
           meal.properties.includes(selectedProperty)
         ));
-        return { ...meal, isActive: doesMealActivate };
+        return { ...meal, isActive: shouldActivate };
       }
       return { ...meal, isActive: false };
     });
@@ -318,6 +321,8 @@ export default class App extends Component {
 
   showLinks = (meal, index) => {
     const googleSearchKey = process.env.REACT_APP_GOOGLE_SEARCH_KEY;
+    const links = [];
+
     this.setState({ clickedMealIndex: index, fetching: { inProgress: true } });
 
     fetch(`https://www.googleapis.com/customsearch/v1?key=${googleSearchKey}=${meal} recipe`)
@@ -327,7 +332,6 @@ export default class App extends Component {
           : this.setState({ fetching: { inProgress: false } })
       ))
       .then((result) => {
-        const links = [];
         result.items.forEach((item) => {
           if (
             item.displayLink.includes('allrecipes.com')
@@ -349,9 +353,7 @@ export default class App extends Component {
       });
   };
 
-  gaEvent = (category, action) => {
-    ReactGA.event({ category, action });
-  };
+  gaEvent = (category, action) => ReactGA.event({ category, action });
 
   render() {
     const {
