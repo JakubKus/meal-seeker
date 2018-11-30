@@ -6,11 +6,8 @@
 }
 
 main {
-  display: flex;
-  flex-flow: column;
 
   a {
-    text-decoration: none;
     color: black;
   }
 
@@ -28,20 +25,6 @@ main {
     font-weight: bold;
     font-size: 35px;
     height: 60px;
-  }
-
-  div.blur {
-    position: fixed;
-    top: 0;
-    left: 0;
-
-    &.on {
-      background-color: #000;
-      height: 100%;
-      opacity: 0.4;
-      width: 100%;
-      z-index: 1;
-    }
   }
 
   div.container {
