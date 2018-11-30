@@ -58,8 +58,12 @@ aside.form {
     position: relative;
     transition: 0.3s;
 
-    &:hover, &.checked:hover {
-      border-color: #fff;
+    &:hover {
+      color: $colorLightGreen;
+    }
+
+    &.checked:hover {
+      color: $colorDarkGreen;
     }
 
     &.checked {
