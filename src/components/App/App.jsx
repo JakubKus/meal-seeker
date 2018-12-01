@@ -319,6 +319,19 @@ export default class App extends Component {
     this.setState({ meals: matchingMeals });
   };
 
+  resetForm = () => {
+    const { form } = this.state;
+
+    const resettedForm = form.map((element) => {
+      if (element.type === 'answer') {
+        return { ...element, isChecked: false };
+      }
+      return element;
+    });
+
+    this.setState({ form: resettedForm }, this.showMeals);
+  };
+
   showLinks = (meal, index) => {
     const googleSearchKey = process.env.REACT_APP_GOOGLE_SEARCH_KEY;
     const links = [];
@@ -366,7 +379,9 @@ export default class App extends Component {
 
     return (
       <main>
-        <header><h1 className="pageTitle">Meal Seeker</h1></header>
+        <header>
+          <button className="title" onClick={this.resetForm}>Meal Seeker</button>
+        </header>
         <div className="container">
           <Form
             form={form}
