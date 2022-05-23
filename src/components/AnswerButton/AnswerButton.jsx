@@ -1,12 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const AnswerButton = ({
-  toggleAnswer,
-  isChecked,
-  answer,
-  gaEvent,
-}) => (
+const AnswerButton = ({ toggleAnswer, isChecked, answer, gaEvent }) => (
   <button
     onClick={() => {
       toggleAnswer();

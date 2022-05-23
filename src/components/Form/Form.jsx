@@ -5,7 +5,7 @@ import AnswerButton from '../AnswerButton/AnswerButton';
 const Form = ({ form, toggleAnswer, gaEvent }) => (
   <aside className="form">
     <h1 className="selectTip">
-      {'Select at least one'}
+      Select at least one
       <img src="./arrow_down.png" alt="arrow down" />
     </h1>
     {

@@ -9,291 +9,65 @@ export default class App extends Component {
     this.state = {
       form: [
         { type: 'question', content: 'Preparation time [mins]' },
-        { type: 'answer', content: 'Less than 10', isChecked: false },
-        { type: 'answer', content: '10 - 20', isChecked: false },
-        { type: 'answer', content: 'More than 20', isChecked: false },
+        { type: 'answer', content: 'Less than 10', value: 'LessThan10', isChecked: false },
+        { type: 'answer', content: '10 - 20', value: 'From10To20', isChecked: false },
+        { type: 'answer', content: 'More than 20', value: 'MoreThan20', isChecked: false },
         { type: 'question', content: 'Temperature' },
-        { type: 'answer', content: 'Hot', isChecked: false },
-        { type: 'answer', content: 'Cold', isChecked: false },
+        { type: 'answer', content: 'Hot', value: 'Hot', isChecked: false },
+        { type: 'answer', content: 'Cold', value: 'Cold', isChecked: false },
         { type: 'question', content: 'Flavor' },
-        { type: 'answer', content: 'Salty', isChecked: false },
-        { type: 'answer', content: 'Sweet', isChecked: false },
-        { type: 'answer', content: 'Spicy', isChecked: false },
+        { type: 'answer', content: 'Salty', value: 'Salty', isChecked: false },
+        { type: 'answer', content: 'Sweet', value: 'Sweet', isChecked: false },
+        { type: 'answer', content: 'Spicy', value: 'Spicy', isChecked: false },
         { type: 'question', content: 'Calories / serving' },
-        { type: 'answer', content: 'Less than 100', isChecked: false },
-        { type: 'answer', content: '100 - 300', isChecked: false },
-        { type: 'answer', content: 'More than 300', isChecked: false },
+        { type: 'answer', content: 'Less than 100', value: 'LessThan100', isChecked: false },
+        { type: 'answer', content: '100 - 300', value: 'From100To300', isChecked: false },
+        { type: 'answer', content: 'More than 300', value: 'MoreThan300', isChecked: false },
         { type: 'question', content: 'Macros' },
-        { type: 'answer', content: 'High carb', isChecked: false },
-        { type: 'answer', content: 'High fat', isChecked: false },
-        { type: 'answer', content: 'High protein', isChecked: false },
+        { type: 'answer', content: 'High carb', value: 'HighCarb', isChecked: false },
+        { type: 'answer', content: 'High fat', value: 'HighFat', isChecked: false },
+        { type: 'answer', content: 'High protein', value: 'HighProtein', isChecked: false },
       ],
-      meals: [
-        {
-          name: 'Apple pie',
-          properties: [
-            'More than 20',
-            'Hot',
-            'Cold',
-            'Sweet',
-            'More than 300',
-            'High carb',
-            'High fat',
-          ],
-          isActive: false,
-        },
-        {
-          name: 'Burger',
-          properties: [
-            '10 - 20',
-            'Hot', 'Salty',
-            'More than 300',
-            'High fat',
-            'High protein',
-          ],
-          isActive: false,
-        },
-        {
-          name: 'Casserole',
-          properties: [
-            'More than 20',
-            'Hot',
-            'Salty',
-            'More than 300',
-            'High fat',
-          ],
-          isActive: false,
-        },
-        {
-          name: 'Cereal',
-          properties: [
-            'Less than 10',
-            'Cold',
-            'Sweet',
-            '100 - 300',
-            'High carb',
-          ],
-          isActive: false,
-        },
-        {
-          name: 'Cheesecake',
-          properties: [
-            'More than 20',
-            'Cold',
-            'Sweet',
-            'More than 300',
-            'High carb',
-            'High fat',
-          ],
-          isActive: false,
-        },
-        {
-          name: 'Chicken with rice',
-          properties: [
-            '10 - 20',
-            'Hot',
-            'Salty',
-            'Spicy',
-            'More than 300',
-            'High carb',
-            'High protein',
-          ],
-          isActive: false,
-        },
-        {
-          name: 'Drop scones',
-          properties: [
-            'Less than 10',
-            'Hot',
-            'Sweet',
-            '100 - 300',
-            'High carb',
-          ],
-          isActive: false,
-        },
-        {
-          name: 'Kebab',
-          properties: [
-            'More than 20',
-            'Hot',
-            'Salty',
-            'Spicy',
-            'More than 300',
-            'High fat',
-            'High protein',
-          ],
-          isActive: false,
-        },
-        {
-          name: 'Lasagna bolognese',
-          properties: [
-            'More than 20',
-            'Hot',
-            'Salty',
-            'More than 300',
-            'High carb',
-            'High fat',
-          ],
-          isActive: false,
-        },
-        {
-          name: 'Letcho',
-          properties: [
-            '10 - 20',
-            'Hot',
-            'Salty',
-            'Spicy',
-            '100 - 300',
-            'High fat',
-          ],
-          isActive: false,
-        },
-        {
-          name: 'Omelette',
-          properties: [
-            'Less than 10',
-            'Hot',
-            'Salty',
-            'Sweet',
-            'Less than 100',
-            'High fat',
-          ],
-          isActive: false,
-        },
-        {
-          name: 'Pancakes',
-          properties: [
-            'Less than 10',
-            'Hot',
-            'Sweet',
-            '100 - 300',
-            'High carb',
-          ],
-          isActive: false,
-        },
-        {
-          name: 'Pizza',
-          properties: [
-            'More than 20',
-            'Hot',
-            'Salty',
-            'Spicy',
-            'More than 300',
-            'High carb',
-            'High fat',
-          ],
-          isActive: false,
-        },
-        {
-          name: 'Pork chop',
-          properties: [
-            '10 - 20',
-            'Hot',
-            'Salty',
-            'More than 300',
-            'High fat',
-            'High protein',
-          ],
-          isActive: false,
-        },
-        {
-          name: 'Porridge',
-          properties: [
-            'Less than 10',
-            'Hot',
-            'Sweet',
-            'Less than 100',
-            'High carb',
-          ],
-          isActive: false,
-        },
-        {
-          name: 'Potato pancakes',
-          properties: [
-            '10 - 20',
-            'Hot',
-            'Salty',
-            '100 - 300',
-            'High carb',
-            'High fat',
-          ],
-          isActive: false,
-        },
-        {
-          name: 'Salmon penne',
-          properties: [
-            '10 - 20',
-            'Hot',
-            'Salty',
-            'More than 300',
-            'High fat',
-            'High protein',
-          ],
-          isActive: false,
-        },
-        {
-          name: 'Scrambled eggs',
-          properties: [
-            'Less than 10',
-            'Hot',
-            'Salty',
-            'Less than 100',
-            'High fat',
-            'High protein',
-          ],
-          isActive: false,
-        },
-        {
-          name: 'Spaghetti bolognese',
-          properties: [
-            'More than 20',
-            'Hot',
-            'Salty',
-            '100 - 300',
-            'High carb',
-          ],
-          isActive: false,
-        },
-        {
-          name: 'Tiramisu',
-          properties: [
-            'More than 20',
-            'Cold',
-            'Sweet',
-            'More than 300',
-            'High carb',
-            'High fat',
-          ],
-          isActive: false,
-        },
-        {
-          name: 'Toasts',
-          properties: [
-            'Less than 10',
-            'Hot',
-            'Salty',
-            'Less than 100',
-            'High carb',
-          ],
-          isActive: false,
-        },
-      ],
+      meals: [],
       clickedMealIndex: -1,
       links: [],
       fetching: { error: false, inProgress: false },
     };
   }
 
-  toggleAnswer = (answerIndex) => {
-    const { form } = this.state;
-    const answer = form[answerIndex];
-
-    form.splice(answerIndex, 1, {
-      ...answer,
-      isChecked: answer.isChecked === false,
+  componentDidMount() {
+    fetch('https://meal-seeker.herokuapp.com/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        query: `{
+          meals {
+            name
+            properties {
+              calories
+              flavor
+              macros
+              preparationTime
+              temperature
+            }
+          }
+        }`,
+      }),
+    }).then((x) => x.json()).then((res) => {
+      this.setState({
+        meals: res.data.meals.map((meal) => ({
+          ...meal,
+          properties: Object.values(meal.properties).flatMap((property) => property),
+          isActive: false,
+        })),
+      });
     });
+  }
 
-    this.setState({ form }, this.showMeals);
+  gaEvent = (category, action) => {
+    ReactGA.event({ category, action });
   };
 
   showMeals = () => {
@@ -302,13 +76,13 @@ export default class App extends Component {
 
     form.forEach((formProperty) => {
       if (formProperty.type === 'answer' && formProperty.isChecked) {
-        selectedProperties.push(formProperty.content);
+        selectedProperties.push(formProperty.value);
       }
     });
 
     const matchingMeals = meals.map((meal) => {
       if (selectedProperties.length) {
-        const shouldActivate = selectedProperties.every(selectedProperty => (
+        const shouldActivate = selectedProperties.every((selectedProperty) => (
           meal.properties.includes(selectedProperty)
         ));
         return { ...meal, isActive: shouldActivate };
@@ -339,7 +113,7 @@ export default class App extends Component {
     this.setState({ clickedMealIndex: index, fetching: { inProgress: true } });
 
     fetch(`https://www.googleapis.com/customsearch/v1?key=${googleSearchKey}=${meal} recipe`)
-      .then(response => (
+      .then((response) => (
         response.ok
           ? response.json()
           : this.setState({ fetching: { inProgress: false } })
@@ -366,7 +140,17 @@ export default class App extends Component {
       });
   };
 
-  gaEvent = (category, action) => ReactGA.event({ category, action });
+  toggleAnswer = (answerIndex) => {
+    const { form } = this.state;
+    const answer = form[answerIndex];
+
+    form.splice(answerIndex, 1, {
+      ...answer,
+      isChecked: answer.isChecked === false,
+    });
+
+    this.setState({ form }, this.showMeals);
+  };
 
   render() {
     const {

@@ -1,22 +1,24 @@
 module.exports = {
-  "extends": "airbnb",
-  "env": {
-    "browser": true,
-    "node": true,
-    "jest": true
+  extends: 'airbnb',
+  env: {
+    browser: true,
+    node: true,
+    jest: true,
   },
-  "parser": "babel-eslint",
-  "parserOptions": {
-    "ecmaVersion": 6,
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true
+  parser: '@babel/eslint-parser',
+  parserOptions: {
+    ecmaVersion: 6,
+    sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true,
     },
   },
-  "rules": {
-    "linebreak-style": [1, "windows"],
-    "react/no-array-index-key": 0,
-    "react/button-has-type": 0,
-    "jsx-a11y/click-events-have-key-events": 0,
-  }
+  rules: {
+    'react/no-array-index-key': 0,
+    'react/button-has-type': 0,
+    'jsx-a11y/click-events-have-key-events': 0,
+    'react/function-component-definition': 0,
+    'object-curly-newline': 0,
+    'class-methods-use-this': 0,
+  },
 };
