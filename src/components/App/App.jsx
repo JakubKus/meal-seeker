@@ -36,7 +36,7 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    fetch('https://meal-seeker.herokuapp.com/graphql', {
+    fetch('https://meal-seeker-api.jkus.dev/graphql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -108,11 +108,12 @@ export default class App extends Component {
 
   showLinks = (meal, index) => {
     const googleSearchKey = process.env.REACT_APP_GOOGLE_SEARCH_KEY;
+    const googleSearchEngineId = process.env.REACT_APP_GOOGLE_SEARCH_ENGINE_ID;
     const links = [];
 
     this.setState({ clickedMealIndex: index, fetching: { inProgress: true } });
 
-    fetch(`https://www.googleapis.com/customsearch/v1?key=${googleSearchKey}=${meal} recipe`)
+    fetch(`https://www.googleapis.com/customsearch/v1?key=${googleSearchKey}&cx=${googleSearchEngineId}&q=${meal} recipe`)
       .then((response) => (
         response.ok
           ? response.json()
